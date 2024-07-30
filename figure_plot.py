@@ -65,3 +65,29 @@ def plot_test_data(df: pd.DataFrame) -> None:
         name='FP'
     ))
     fig.show()
+
+def plot_confussion_matrix(y: np.ndarray, y_pred: np.ndarray) -> None:
+    TP, FP, TN, FN = 0, 0, 0, 0
+    for i in range(len(y)):
+        if y[i] == 1:
+            if y_pred[i] == 0:
+                FN = FN + 1
+            else:
+                TP = TP + 1
+        else:
+            if y_pred[i] == 0:
+                TN = TN + 1
+            else:
+                FP = FP + 1
+
+    confussion_matrix = [[TP, FN], [FP, TN]]
+    columns = ['positive sample', 'negative sample']
+    rows = ['positive prediction', 'negative prediction']
+    fig = go.Figure(data=go.Heatmap(
+        z=confussion_matrix,
+        text=confussion_matrix,
+        texttemplate="%{text}",
+        textfont={"size": 20},
+        x=columns,
+        y=rows))
+    fig.show()
