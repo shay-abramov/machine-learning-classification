@@ -10,6 +10,7 @@ if __name__ == '__main__':
     # turn df into ndarray
     X = df.iloc[:, :2].values
     y = df.iloc[:, -1].values
+    y = y.astype('int')
 
     # testing with inate fucitons
     # X, y = make_blobs(n_samples=100, centers=2, n_features=2, random_state=1)
@@ -25,7 +26,10 @@ if __name__ == '__main__':
     df_test = get_samples()
     X_test = df_test.iloc[:, :2].values
     y_test = df_test.iloc[:, -1].values
+    y_test = y_test.astype('int')
     # X_test, y_test = make_blobs(n_samples=100, centers=2, n_features=2, random_state=1)
+    # df_test = pd.DataFrame(np.c_[X, y])
+    # df_test.rename(columns={0: 'feature1', 1: 'feature2', 2: 'target'}, inplace=True)
     # df_test = pd.DataFrame(np.c_[X_test, y_test])
     # df_test.rename(columns={0: 'feature1', 1: 'feature2', 2: 'target'}, inplace=True)
     y_pred = model.predict(X_test)
